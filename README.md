@@ -42,3 +42,6 @@ $ rails server
 
 * **email** : sample@email.com
 * **password** : password
+
+
+(HTTPSからSSH通信へ変更済み)
