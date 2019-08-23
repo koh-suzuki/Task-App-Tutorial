@@ -51,22 +51,51 @@ p {
 }
 
 /* ヘッダー */
+#header {
+  background-color: teal;
+}
 
 #logo {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
   color: #fff;
-  text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
+  font-style: italic;
 }
 
 #logo:hover {
-  color: #fff;
+  color: silver;
   text-decoration: none;
 }
+
+li .header-list {
+  color: #fff !important;
+  font-weight: bold;
+}
+
+li .header-list:hover {
+  color: silver !important;
+  text-decoration: none;
+}
+
+#dropdown-title {
+  background-color: teal;
+}
+
+
+/* トップページ */ 
+#top-main {
+    background-color: rgba(255,255,255,0);
+}
+
+h1.top-main-tittle {
+    font-style: italic;
+    font-weight: bold;
+}
+
 
 /* デバッグウインドウ */
 
