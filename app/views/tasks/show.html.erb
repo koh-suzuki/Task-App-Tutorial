@@ -1,0 +1,34 @@
+<% provide(:title, @user.name) %>
+<div class="container">
+  <h1>タスク詳細</h1>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <table class="table table-bordered" id="table-task">
+      <tbody>
+        <tr>
+          <th class="active col-md-2">ID</th>
+          <td class="col-md-10"><%= @user.id %></td>
+        </tr>
+        <tr>
+          <th class="active">名称</th>
+          <td><%= @task.task_name %></td>
+        </tr>
+        <tr>
+          <th class="active">詳細</th>
+          <td>
+            <%= @task.task_description %>
+          </td>
+        </tr>
+        <tr>
+          <th class="active">作成日</th>
+          <td><%= l(@task.created_at, format: :long) %></td>
+        </tr>
+        <tr>
+          <th class="active">更新日</th>
+          <td><%= l(@task.updated_at, format: :long) %></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
