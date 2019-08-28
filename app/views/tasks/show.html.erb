@@ -16,7 +16,7 @@
         <tr>
           <th class="active">詳細</th>
           <td>
-            <%= @task.task_description %>
+            <%= raw Rinku.auto_link(h(@task.task_description)) %>
           </td>
         </tr>
         <tr>
