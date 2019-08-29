@@ -4,6 +4,7 @@
   <div class="row">
     <h1>利用者一覧</h1>
      <div class="col-md-10 col-md-offset-1">
+       <%= will_paginate :previous_label => '前', :next_label => '次' %>
        <table class="table table-condensed table-hover", id="table-users">
          <thead>
            <tr>
@@ -19,6 +20,7 @@
            <% end %>
          </tbody>
        </table>
+       <%= will_paginate :previous_label => '前', :next_label => '次' %>
      </div>
   </div>
 </div>
