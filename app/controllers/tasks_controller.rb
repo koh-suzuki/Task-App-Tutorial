@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
-  before_action :set_user
-  
+  before_action :logged_in, only:[:new, :create, :index, :edit, :update, :show, :destroy]
+  before_action :correct_user, only[:new, :create, :index, :edit, :update, :show, :destroy]
+  before_action :set_user, only:[:admin_or_correct_user, :index, :edit]
   
   def new
     @task = Task.new
@@ -17,6 +18,7 @@ class TasksController < ApplicationController
   end
   
   def index
+    @tasks = Task.all
     @tasks = @user.tasks
   end
   
@@ -52,5 +54,17 @@ class TasksController < ApplicationController
       
       def task_params
         params.require(:task).permit(:task_name, :task_description)
+      end
+      
+      def correct_user
+        redirect_to(root_url) unless current_user?(@user)
+      end
+      
+      def logged_in_user
+        unless logged_in?
+        store_location
+        flash[:danger] = "ログインしてください。"
+        redirect_to login_url
+        end
       end
 end

@@ -1,13 +1,16 @@
 class UsersController < ApplicationController
-  before_action :set_user, only:[:edit, :show, :update]
-  before_action :logged_in_user, only:[:index, :edit, :show, :update]
+  before_action :set_user, only:[:edit, :show, :update, :destroy]
+  before_action :logged_in_user, only:[:index, :edit, :show, :update, :destroy]
   before_action :correct_user, only:[:edit, :update]
-  
+  before_action :admin_user, only:[:destroy, :index]
+  before_action :admin_or_correct_user, only: :show
+
   def index
     @users = User.paginate(page: params[:page], per_page:20)
   end
   
   def show
+    
   end
 
   def new
@@ -36,6 +39,12 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+  
+  def destroy
+    @user.destroy
+    flash[:success] = "タスクを削除しました。"
+    redirect_to user_tasks_path
+  end
 
   
   private
@@ -61,4 +70,16 @@ class UsersController < ApplicationController
       redirect_to(root_url) unless current_user?(@user)
     end
     
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+    end
+    
+    def admin_or_correct_user
+      if @user.blank?
+        unless current_user?(@user) || current_user.admin?
+        flash[:danger] = "編集権限がありません。"
+        redirect_to(root_url)
+        end
+      end
+    end
 end

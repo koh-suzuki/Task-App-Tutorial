@@ -1,4 +1,4 @@
-<% provide(:title, @user.name) %>
+<% provide(:title, current_user) %>
 <div class="container">
   <h1>タスク詳細</h1>
   <div class="row">
@@ -7,7 +7,7 @@
       <tbody>
         <tr>
           <th class="active col-md-2">ID</th>
-          <td class="col-md-10"><%= @user.id %></td>
+          <td class="col-md-10"><%= @task.id %></td>
         </tr>
         <tr>
           <th class="active">名称</th>
