@@ -14,6 +14,10 @@ class UsersController < ApplicationController
   end
 
   def new
+    if logged_in? && !current_user.admin?
+      flash[:info] = 'すでにログインしています。'
+      redirect_to current_user
+    end
     @user = User.new
   end
   
@@ -42,8 +46,8 @@ class UsersController < ApplicationController
   
   def destroy
     @user.destroy
-    flash[:success] = "タスクを削除しました。"
-    redirect_to user_tasks_path
+    flash[:success] = "#{@user.name}を削除しました。"
+    redirect_to users_url
   end
 
   
@@ -58,21 +62,6 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
     
-    def logged_in_user
-      unless logged_in?
-      store_location
-      flash[:danger] = "ログインしてください。"
-      redirect_to login_url
-      end
-    end
-    
-    def correct_user
-      redirect_to(root_url) unless current_user?(@user)
-    end
-    
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
-    end
     
     def admin_or_correct_user
       if @user.blank?
