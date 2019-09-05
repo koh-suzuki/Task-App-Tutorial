@@ -15,7 +15,7 @@
           </thead>
           
           <tbody>
-            <% @tasks.each do |task| %>
+            <% @tasks.order(created_at: :DESC).each do |task| %>
               <tr>
                 <td><%= link_to task.task_name, user_task_path(@user, task), id: "task-name" %></td>
                 <td><%= l(task.created_at, format: :long) %></td>
